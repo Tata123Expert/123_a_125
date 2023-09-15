@@ -1,3 +1,9 @@
+noseX = 0;
+noseY = 0;
+difference = 0;
+rightWristX = 0;
+leftWristX = 0;
+
 function setup()
 {
     video = createCapture(VIDEO);
@@ -12,6 +18,10 @@ function setup()
 function draw()
 {
     background('#DEF6FC');
+    document.getElementById("square_side").innerHTML = "Largura e Altura serão: " + difference + "px";
+    fill('#6EFCB0');
+    stroke('#6EFCB0');
+    square(noseX, noseY, difference);
 }
 
 function modelLoaded()
@@ -24,48 +34,17 @@ function gotPoses(results)
     if(results.length > 0)
     {
         console.log(results);
+        noseX = results[0].pose.nose.x - 200;
+        noseY = results[0].pose.nose.y - 110;
+        console.log("noseX = " + noseX + "noseY = " + noseY);
+        
+        leftWristX = results[0].pose.leftWrist.x;
+        rightWristX = results[0].pose.rightWrist.x;  
+        difference = floor(leftWristX - rightWristX);     
+        
+        console.log("leftWristX = " + leftWristX + "rightWristX = " + rightWristX + "difference = " + difference);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
